@@ -24,6 +24,10 @@ public class SortUtil {
         }
     }
 
+    /**
+     * insert sort
+     * @param array
+     */
     public static void insertSort(Comparable [] array) {
         int len = array.length;
         for (int i = 1;i <len; i ++) {
@@ -36,6 +40,50 @@ public class SortUtil {
             }
         }
     }
+
+
+    /**
+     * Merge sort
+     * @param array
+     */
+    public static void mergeSort(Comparable [] array) {
+        int len = array.length;
+
+        mergeSort(array, 0, len - 1);
+    }
+
+    private static void mergeSort(Comparable [] array, int low, int high) {
+        if (low >= high) return;
+        int mid = low + (high - low) / 2;
+        mergeSort(array, low, mid);
+        mergeSort(array, mid + 1, high);
+        merge(array, low, mid, high);
+    }
+
+    private static void merge(Comparable [] array, int low, int mid, int high) {
+        int index1 = low;
+        int index2 = mid + 1;
+        Comparable [] tempArray = new Comparable[high - low + 1];
+        int index = 0;
+        while (index1 <= mid && index2 <= high) {
+            if (less(array[index1], array[index2])) {
+                tempArray[index ++] = array[index1 ++];
+            }else {
+                tempArray[index ++] = array[index2 ++];
+            }
+        }
+        while (index1 <= mid) {
+            tempArray[index ++] = array[index1 ++];
+        }
+
+        while (index2 <= high) {
+            tempArray[index ++] = array[index2 ++];
+        }
+        for (int i = 0; i < high - low + 1; i ++) {
+            array[i + low] = tempArray[i];
+        }
+    }
+
 
 
 

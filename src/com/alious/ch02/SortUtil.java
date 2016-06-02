@@ -41,6 +41,21 @@ public class SortUtil {
         }
     }
 
+    /**
+     * insert sort
+     * @param array
+     */
+    public static void insertSort(Comparable [] array, int low, int high) {
+        int len = high - low + 1;
+        for (int i = 1;i <len; i ++) {
+            for (int j = i; j > 0; j --) {
+                if (less(array[j + low], array[j - 1 + low])) {
+                    exch(array, j + low, j -1 + low);
+                }
+            }
+        }
+    }
+
 
     /**
      * Merge sort
@@ -55,8 +70,24 @@ public class SortUtil {
     private static void mergeSort(Comparable [] array, int low, int high) {
         if (low >= high) return;
         int mid = low + (high - low) / 2;
+
+        if (mid - low < 10) {
+            insertSort(array, low, mid);
+            insertSort(array, mid + 1, high);
+            if (mid < high && less(array[mid], array[mid + 1])) {
+                //has sorted, not need merge anymore
+                return;
+            }
+            merge(array, low, mid, high);
+            return;
+        }
+
         mergeSort(array, low, mid);
         mergeSort(array, mid + 1, high);
+        if (mid < high && less(array[mid], array[mid + 1])) {
+            //has sorted, not need merge anymore
+            return;
+        }
         merge(array, low, mid, high);
     }
 

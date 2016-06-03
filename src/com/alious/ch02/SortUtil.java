@@ -115,8 +115,43 @@ public class SortUtil {
         }
     }
 
+    /**
+     * Basic quick sort
+     *
+     * @param array
+     */
+    public static void basicQuickSort(Comparable [] array) {
+        int len = array.length;
+        basicQuickSort(array, 0, len - 1);
+    }
 
+    private static void basicQuickSort(Comparable [] array, int low, int high) {
+        if (high - low < 100) {
+            insertSort(array, low, high);
+            return;
+        }
+        int divider = partition(array, low, high);
+        basicQuickSort(array, low, divider - 1);
+        basicQuickSort(array, divider + 1, high);
+    }
 
+    private static int partition(Comparable [] array, int low, int high) {
+        int left = low;
+        int right = high;
+        Comparable key = array[low];
+        while (true) {
+            while (less(array[left ++], key)) {
+                if (left == high) break;
+            }
+            while (less(key, array[right --])) {
+                if (right == low) break;
+            }
+            if (left >= right) break;
+            exch(array, left, right);
+        }
+        exch(array, low, right);
+        return right;
+    }
 
     public static boolean less(Comparable a, Comparable b) {
         return a.compareTo(b) < 0;

@@ -17,7 +17,7 @@ public class Utils {
         Random random = new Random(System.currentTimeMillis());
         int i = 0;
         while (initSize-- > 0) {
-            result[i ++] = random.nextInt(1000);
+            result[i ++] = random.nextInt(100000);
         }
         return result;
     }

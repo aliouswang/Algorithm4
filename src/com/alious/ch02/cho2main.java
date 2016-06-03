@@ -8,12 +8,17 @@ import com.alious.util.Utils;
 public class cho2main {
 
     public static void main(String [] args) {
-        Integer [] array = Utils.randomSortedIntArray();
+        Integer [] array = Utils.randomSortedIntArray(5000);
+        long curTime = System.currentTimeMillis();
 //        SortUtil.selectSort(array);
+
 //        SortUtil.insertSort(array, 0, array.length - 1);
-        SortUtil.mergeSort(array);
-        assert SortUtil.isSorted(array);
-        SortUtil.show(array);
+//        SortUtil.mergeSort(array);
+        SortUtil.basicQuickSort(array);
+
+        System.out.println(System.currentTimeMillis() - curTime);
+//        assert SortUtil.isSorted(array);
+//        SortUtil.show(array);
     }
 
 }
